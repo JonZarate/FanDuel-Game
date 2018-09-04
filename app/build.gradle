@@ -21,10 +21,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation "com.android.support:support-v4:${support}"
+    implementation "com.android.support:design:${support}"
     implementation "com.android.support:appcompat-v7:${support}"
     implementation "com.android.support:cardview-v7:${support}"
+    implementation "com.android.support:recyclerview-v7:${support}"
 
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
+
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${gson}"
+
+    implementation "me.zhanghai.android.materialprogressbar:library:${materialprogressbar}"
 
     implementation "com.jakewharton:butterknife:${butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${butterknife}"
