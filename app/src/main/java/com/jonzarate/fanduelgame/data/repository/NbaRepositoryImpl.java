@@ -11,7 +11,6 @@ import retrofit2.Response;
 
 public class NbaRepositoryImpl implements NbaRepository {
 
-
     private FanDuelApi api;
 
     @Inject

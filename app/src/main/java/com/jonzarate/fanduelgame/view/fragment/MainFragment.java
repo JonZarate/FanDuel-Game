@@ -78,7 +78,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     private void setupView() {
-        pager.setAdapter(new MainFragmentAdapter(getFragmentManager()));
+        pager.setAdapter(new MainFragmentAdapter(getContext(), getFragmentManager()));
         tabs.setupWithViewPager(pager);
     }
 

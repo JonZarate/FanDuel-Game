@@ -1,5 +1,9 @@
 package com.jonzarate.fanduelgame.di.module;
 
+import com.jonzarate.fanduelgame.data.repository.NbaRepository;
+import com.jonzarate.fanduelgame.data.repository.NbaRepositoryImpl;
+import com.jonzarate.fanduelgame.data.source.net.FanDuelApi;
+import com.jonzarate.fanduelgame.data.source.net.RetrofitSetup;
 import com.jonzarate.fanduelgame.interactor.threading.MainThread;
 import com.jonzarate.fanduelgame.interactor.threading.WorkerThread;
 
@@ -19,6 +23,16 @@ public class AppModule {
     @Provides @Singleton
     WorkerThread provideWorkerThread(WorkerThread worker) {
         return worker;
+    }
+
+    @Provides @Singleton
+    FanDuelApi provideFanDuelApi() {
+        return RetrofitSetup.api;
+    }
+
+    @Provides @Singleton
+    NbaRepository provideNbaRepository(NbaRepositoryImpl repo) {
+        return repo;
     }
 
 }

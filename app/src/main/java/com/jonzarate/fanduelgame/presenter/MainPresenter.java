@@ -30,11 +30,11 @@ public class MainPresenter implements MainContract.Presenter, GetNbaDataCallback
 
     @Override
     public void onGetData(NbaData data) {
-
+        view.displayToast();
     }
 
     @Override
     public void onError() {
-
+        view.displayToast();
     }
 }

@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.jonzarate.fanduelgame"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -30,8 +30,10 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${support}"
 
     implementation "com.google.dagger:dagger:${dagger}"
-    implementation 'com.android.support:support-v4:28.0.0-rc02'
     annotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
+
+    implementation "android.arch.persistence.room:runtime:${room}"
+    annotationProcessor "android.arch.persistence.room:compiler:${room}"
 
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
 
