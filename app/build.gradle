@@ -9,6 +9,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "FANDUEL_API", "\"https://gist.githubusercontent.com/liamjdouglas/\""
     }
     buildTypes {
         release {
@@ -26,6 +28,9 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${support}"
     implementation "com.android.support:cardview-v7:${support}"
     implementation "com.android.support:recyclerview-v7:${support}"
+
+    implementation "com.google.dagger:dagger:${dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
 
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
 
