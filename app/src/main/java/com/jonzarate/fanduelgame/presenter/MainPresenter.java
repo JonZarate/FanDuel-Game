@@ -25,7 +25,7 @@ public class MainPresenter implements MainContract.Presenter, GetNbaDataCallback
 
     @Override
     public void onFabClick() {
-
+        view.displayToast();
     }
 
     @Override

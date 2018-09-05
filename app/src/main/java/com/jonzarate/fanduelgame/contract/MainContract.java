@@ -8,6 +8,6 @@ public interface MainContract {
     }
 
     interface View {
-
+        void displayToast();
     }
 }
