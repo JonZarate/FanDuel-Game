@@ -4,12 +4,13 @@ import com.jonzarate.fanduelgame.di.module.AppModule;
 import com.jonzarate.fanduelgame.interactor.threading.MainThread;
 import com.jonzarate.fanduelgame.interactor.threading.WorkerThread;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
+@Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {
 
-    MainThread mainThread();
-    WorkerThread workerThread();
 
 }

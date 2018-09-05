@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jonzarate.fanduelgame.FanDuelApplication;
 import com.jonzarate.fanduelgame.R;
 import com.jonzarate.fanduelgame.contract.MainContract;
+import com.jonzarate.fanduelgame.di.component.DaggerMainComponent;
+import com.jonzarate.fanduelgame.di.module.MainModule;
 
 import javax.inject.Inject;
 
@@ -18,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainContract.View {
 
     @Inject
     MainContract.Presenter presenter;
@@ -41,6 +44,15 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         ButterKnife.bind(this, view);
+
+        DaggerMainComponent
+                .builder()
+                .appComponent(((FanDuelApplication)getContext().getApplicationContext()).appComponent)
+                .mainModule(new MainModule(this))
+                .build()
+                .inject(this);
+
+        presenter.loadNbaData();
 
         return view;
     }

@@ -1,9 +1,8 @@
 package com.jonzarate.fanduelgame.di.module;
 
 import com.jonzarate.fanduelgame.contract.MainContract;
+import com.jonzarate.fanduelgame.di.scope.ActivityScope;
 import com.jonzarate.fanduelgame.presenter.MainPresenter;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,7 +13,7 @@ public class MainModule {
     private MainContract.View view;
 
     public MainModule(MainContract.View view) {
-
+        this.view = view;
     }
 
     @Provides
@@ -22,7 +21,7 @@ public class MainModule {
         return view;
     }
 
-    @Provides @Singleton
+    @Provides @ActivityScope
     MainContract.Presenter providePresenter(MainPresenter presenter) {
         return presenter;
     }
