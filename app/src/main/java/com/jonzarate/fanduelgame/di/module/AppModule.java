@@ -1,7 +1,7 @@
 package com.jonzarate.fanduelgame.di.module;
 
-import com.jonzarate.fanduelgame.threading.MainThread;
-import com.jonzarate.fanduelgame.threading.WorkerThread;
+import com.jonzarate.fanduelgame.interactor.threading.MainThread;
+import com.jonzarate.fanduelgame.interactor.threading.WorkerThread;
 
 import javax.inject.Singleton;
 
