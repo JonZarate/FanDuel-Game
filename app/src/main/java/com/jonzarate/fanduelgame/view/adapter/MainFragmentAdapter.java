@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.jonzarate.fanduelgame.R;
 import com.jonzarate.fanduelgame.view.fragment.HistoryFragment;
+import com.jonzarate.fanduelgame.view.fragment.PlayerFragment;
 import com.jonzarate.fanduelgame.view.fragment.TeamFragment;
 
 public class MainFragmentAdapter extends FragmentStatePagerAdapter {
@@ -21,7 +22,7 @@ public class MainFragmentAdapter extends FragmentStatePagerAdapter {
         this.context = context;
         fragments = new Fragment[3];
         fragments[0] = HistoryFragment.newInstance();
-        fragments[1] = HistoryFragment.newInstance();
+        fragments[1] = PlayerFragment.newInstance();
         fragments[2] = TeamFragment.newInstance();
 
     }

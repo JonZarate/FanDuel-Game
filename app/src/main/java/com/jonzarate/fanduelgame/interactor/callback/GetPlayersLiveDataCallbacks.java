@@ -4,9 +4,11 @@ import android.arch.lifecycle.LiveData;
 
 import com.jonzarate.fanduelgame.data.model.Player;
 
+import java.util.List;
+
 public interface GetPlayersLiveDataCallbacks extends BaseCallbacks {
 
-    void onGetPlayersObservable(LiveData<Player> players);
+    void onGetPlayersObservable(LiveData<List<Player>> players);
     void onGetPlayersObservableError();
 
 }

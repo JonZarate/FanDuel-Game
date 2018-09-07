@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 
 import com.jonzarate.fanduelgame.FanDuelApplication;
 import com.jonzarate.fanduelgame.R;
-import com.jonzarate.fanduelgame.contract.TeamContract;
-import com.jonzarate.fanduelgame.data.model.Team;
-import com.jonzarate.fanduelgame.di.component.DaggerTeamComponent;
-import com.jonzarate.fanduelgame.di.module.TeamModule;
-import com.jonzarate.fanduelgame.view.adapter.TeamAdapter;
+import com.jonzarate.fanduelgame.contract.PlayerContract;
+import com.jonzarate.fanduelgame.data.model.Player;
+import com.jonzarate.fanduelgame.di.component.DaggerPlayerComponent;
+import com.jonzarate.fanduelgame.di.module.PlayerModule;
+import com.jonzarate.fanduelgame.view.adapter.PlayerAdapter;
 
 import java.util.List;
 
@@ -31,23 +31,22 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TeamFragment extends Fragment implements TeamContract.View {
+public class PlayerFragment extends Fragment implements PlayerContract.View {
 
-    @BindView(R.id.team_recycler)
+    @BindView(R.id.player_recycler)
     RecyclerView recycler;
 
     @Inject
-    TeamContract.Presenter presenter;
+    PlayerContract.Presenter presenter;
 
-    private TeamAdapter adapter;
+    private PlayerAdapter adapter;
 
-    public static TeamFragment newInstance(){
-        TeamFragment fragment = new TeamFragment();
+    public static PlayerFragment newInstance() {
+        PlayerFragment fragment = new PlayerFragment();
         return fragment;
     }
 
-
-    public TeamFragment() {
+    public PlayerFragment() {
         // Required empty public constructor
     }
 
@@ -56,19 +55,20 @@ public class TeamFragment extends Fragment implements TeamContract.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_team, container, false);
+        View view = inflater.inflate(R.layout.fragment_player, container, false);
 
         ButterKnife.bind(this, view);
 
+
         initializeRecycler();
 
-        DaggerTeamComponent.builder()
+        DaggerPlayerComponent.builder()
                 .appComponent(((FanDuelApplication) getContext().getApplicationContext()).appComponent)
-                .teamModule(new TeamModule(this))
+                .playerModule(new PlayerModule(this))
                 .build()
                 .inject(this);
 
-        presenter.loadTeamsLiveData();
+        presenter.loadPlayersLiveData();
 
         return view;
     }
@@ -81,23 +81,24 @@ public class TeamFragment extends Fragment implements TeamContract.View {
 
         recycler.setLayoutManager(layoutManager);
         recycler.addItemDecoration(dividerItemDecoration);
-        recycler.setAdapter(adapter = new TeamAdapter());
+        recycler.setAdapter(adapter = new PlayerAdapter());
     }
 
     @Override
-    public void setTeamsLiveData(LiveData<List<Team>> teams) {
-        teams.observe(this, new Observer<List<Team>>() {
+    public void setPlayersLiveData(LiveData<List<Player>> players) {
+        players.observe(this, new Observer<List<Player>>() {
             @Override
-            public void onChanged(@Nullable List<Team> teams) {
-                updateTeams(teams);
+            public void onChanged(@Nullable List<Player> players) {
+                updatePlayers(players);
             }
         });
 
-        updateTeams(teams.getValue());
+        updatePlayers(players.getValue());
     }
 
-    private void updateTeams(List<Team> teams) {
-        adapter.updateTeams(teams);
+    private void updatePlayers(List<Player> players) {
+        adapter.updatePlayer(players);
         adapter.notifyDataSetChanged();
     }
+
 }

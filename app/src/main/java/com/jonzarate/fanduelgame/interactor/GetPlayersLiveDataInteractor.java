@@ -8,6 +8,8 @@ import com.jonzarate.fanduelgame.interactor.callback.GetPlayersLiveDataCallbacks
 import com.jonzarate.fanduelgame.interactor.threading.MainThread;
 import com.jonzarate.fanduelgame.interactor.threading.WorkerThread;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class GetPlayersLiveDataInteractor extends BaseInteractor<GetPlayersLiveDataCallbacks> {
@@ -27,7 +29,7 @@ public class GetPlayersLiveDataInteractor extends BaseInteractor<GetPlayersLiveD
 
     @Override
     protected void runInMain(Object result, GetPlayersLiveDataCallbacks callback) {
-        LiveData<Player> players = (LiveData<Player>) result;
+        LiveData<List<Player>> players = (LiveData<List<Player>>) result;
         if (players != null) {
             callback.onGetPlayersObservable(players);
         } else {
