@@ -5,14 +5,14 @@ import android.arch.lifecycle.LiveData;
 import com.jonzarate.fanduelgame.contract.MainContract;
 import com.jonzarate.fanduelgame.data.model.NbaData;
 import com.jonzarate.fanduelgame.data.model.Player;
-import com.jonzarate.fanduelgame.interactor.GetPlayersLiveDataCallbacks;
+import com.jonzarate.fanduelgame.interactor.callback.GetPlayersLiveDataCallbacks;
 import com.jonzarate.fanduelgame.interactor.GetPlayersLiveDataInteractor;
-import com.jonzarate.fanduelgame.interactor.LoadNbaDataCallbacks;
+import com.jonzarate.fanduelgame.interactor.callback.LoadNbaDataCallbacks;
 import com.jonzarate.fanduelgame.interactor.LoadNbaDataInteractor;
 
 import javax.inject.Inject;
 
-public class MainPresenter implements MainContract.Presenter, LoadNbaDataCallbacks, GetPlayersLiveDataCallbacks {
+public class MainPresenter implements MainContract.Presenter, LoadNbaDataCallbacks {
 
     private MainContract.View view;
     private LoadNbaDataInteractor loadNbaDataInteractor;
@@ -41,7 +41,6 @@ public class MainPresenter implements MainContract.Presenter, LoadNbaDataCallbac
     @Override
     public void onLoadNbaData(NbaData data) {
         view.displayToast("load nba data");
-        getPlayersLiveDataInteractor.execute(this);
     }
 
     @Override
@@ -49,13 +48,4 @@ public class MainPresenter implements MainContract.Presenter, LoadNbaDataCallbac
         view.displayToast("error nba data");
     }
 
-    @Override
-    public void onGetPlayersObservable(LiveData<Player> players) {
-        view.displayToast("get players");
-    }
-
-    @Override
-    public void onGetPlayersObservableError() {
-        view.displayToast("error get players");
-    }
 }

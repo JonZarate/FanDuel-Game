@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.jonzarate.fanduelgame.data.model.NbaData;
 import com.jonzarate.fanduelgame.data.model.Player;
+import com.jonzarate.fanduelgame.data.model.Team;
 import com.jonzarate.fanduelgame.data.source.local.NbaDb;
 import com.jonzarate.fanduelgame.data.source.net.FanDuelApi;
 
@@ -32,14 +33,13 @@ public class NbaRepositoryImpl implements NbaRepository {
         Response<NbaData> response = null;
         try {
             response = api.getNbaData().execute();
-
-            if (response.isSuccessful()) {
-                data = response.body();
-
-                saveNbaData(data);
-            }
         } catch (IOException ignore) { }
 
+        if (response.isSuccessful()) {
+            data = response.body();
+
+            saveNbaData(data);
+        }
 
         return data;
     }
@@ -49,14 +49,20 @@ public class NbaRepositoryImpl implements NbaRepository {
 
         // Ease access to default image url
         for (Player p : data.players) {
-            p.imageUrl = p.images.getDefaultImage().getUrl();
+            p.imageUrl = p.images.defaultImage.url;
         }
 
         db.playerDao().insertAll(data.players);
+        db.teamDao().insertAll(data.teams);
     }
 
     @Override
     public LiveData<List<Player>> getPlayersLiveData() {
         return db.playerDao().getAll();
+    }
+
+    @Override
+    public LiveData<List<Team>> getTeamsLiveData() {
+        return db.teamDao().getAllLiveData();
     }
 }

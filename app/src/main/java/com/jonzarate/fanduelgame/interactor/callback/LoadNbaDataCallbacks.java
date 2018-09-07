@@ -1,4 +1,4 @@
-package com.jonzarate.fanduelgame.interactor;
+package com.jonzarate.fanduelgame.interactor.callback;
 
 import com.jonzarate.fanduelgame.data.model.NbaData;
 

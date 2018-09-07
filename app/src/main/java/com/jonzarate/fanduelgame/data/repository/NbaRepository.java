@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.jonzarate.fanduelgame.data.model.NbaData;
 import com.jonzarate.fanduelgame.data.model.Player;
+import com.jonzarate.fanduelgame.data.model.Team;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public interface NbaRepository {
 
     void saveNbaData(NbaData data);
 
-
     LiveData<List<Player>> getPlayersLiveData();
+
+    LiveData<List<Team>> getTeamsLiveData();
 
 }

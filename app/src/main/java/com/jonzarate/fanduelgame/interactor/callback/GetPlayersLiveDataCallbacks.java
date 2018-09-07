@@ -1,4 +1,4 @@
-package com.jonzarate.fanduelgame.interactor;
+package com.jonzarate.fanduelgame.interactor.callback;
 
 import android.arch.lifecycle.LiveData;
 

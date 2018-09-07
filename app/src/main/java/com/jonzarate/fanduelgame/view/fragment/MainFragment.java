@@ -78,6 +78,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     private void setupView() {
+        pager.setOffscreenPageLimit(3);
         pager.setAdapter(new MainFragmentAdapter(getContext(), getFragmentManager()));
         tabs.setupWithViewPager(pager);
     }

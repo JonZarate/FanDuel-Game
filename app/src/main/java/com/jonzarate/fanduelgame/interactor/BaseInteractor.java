@@ -1,5 +1,6 @@
 package com.jonzarate.fanduelgame.interactor;
 
+import com.jonzarate.fanduelgame.interactor.callback.BaseCallbacks;
 import com.jonzarate.fanduelgame.interactor.threading.MainThread;
 import com.jonzarate.fanduelgame.interactor.threading.WorkerThread;
 
