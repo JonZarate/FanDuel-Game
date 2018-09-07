@@ -7,28 +7,28 @@ import com.jonzarate.fanduelgame.interactor.threading.WorkerThread;
 
 import javax.inject.Inject;
 
-public class GetNbaDataInteractor extends BaseInteractor<GetNbaDataCallbacks> {
+public class LoadNbaDataInteractor extends BaseInteractor<LoadNbaDataCallbacks> {
 
     private NbaRepository repo;
 
     @Inject
-    protected GetNbaDataInteractor(MainThread main, WorkerThread worker,
-                                   NbaRepository repo) {
+    protected LoadNbaDataInteractor(MainThread main, WorkerThread worker,
+                                    NbaRepository repo) {
         super(main, worker);
         this.repo = repo;
     }
 
     @Override
     protected Object runInBackground() {
-        return repo.getNbaData();
+        return repo.downloadNbaData();
     }
 
     @Override
-    protected void runInMain(Object result, GetNbaDataCallbacks callback) {
+    protected void runInMain(Object result, LoadNbaDataCallbacks callback) {
         NbaData data = (NbaData) result;
         if (data != null)
-            callback.onGetData(data);
+            callback.onLoadNbaData(data);
         else
-            callback.onError();
+            callback.onLoadNbaDataError();
     }
 }

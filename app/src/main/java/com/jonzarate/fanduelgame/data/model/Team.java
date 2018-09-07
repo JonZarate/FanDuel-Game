@@ -1,16 +1,16 @@
 package com.jonzarate.fanduelgame.data.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(tableName = "team")
 public class Team {
 
-    private int id;
-    private String name;
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    public int id;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
+    @ColumnInfo(name = "name")
+    public String name;
 }

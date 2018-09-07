@@ -1,40 +1,61 @@
 package com.jonzarate.fanduelgame.presenter;
 
+import android.arch.lifecycle.LiveData;
+
 import com.jonzarate.fanduelgame.contract.MainContract;
 import com.jonzarate.fanduelgame.data.model.NbaData;
-import com.jonzarate.fanduelgame.interactor.GetNbaDataCallbacks;
-import com.jonzarate.fanduelgame.interactor.GetNbaDataInteractor;
+import com.jonzarate.fanduelgame.data.model.Player;
+import com.jonzarate.fanduelgame.interactor.GetPlayersLiveDataCallbacks;
+import com.jonzarate.fanduelgame.interactor.GetPlayersLiveDataInteractor;
+import com.jonzarate.fanduelgame.interactor.LoadNbaDataCallbacks;
+import com.jonzarate.fanduelgame.interactor.LoadNbaDataInteractor;
 
 import javax.inject.Inject;
 
-public class MainPresenter implements MainContract.Presenter, GetNbaDataCallbacks{
+public class MainPresenter implements MainContract.Presenter, LoadNbaDataCallbacks, GetPlayersLiveDataCallbacks {
 
     private MainContract.View view;
-    private GetNbaDataInteractor getNbaDataInteractor;
+    private LoadNbaDataInteractor loadNbaDataInteractor;
+    private GetPlayersLiveDataInteractor getPlayersLiveDataInteractor;
 
     @Inject
-    public MainPresenter(MainContract.View view, GetNbaDataInteractor getNbaDataInteractor){
+    public MainPresenter(MainContract.View view,
+                         LoadNbaDataInteractor loadNbaDataInteractor,
+                         GetPlayersLiveDataInteractor getPlayersLiveDataInteractor){
         this.view = view;
-        this.getNbaDataInteractor = getNbaDataInteractor;
+        this.loadNbaDataInteractor = loadNbaDataInteractor;
+        this.getPlayersLiveDataInteractor = getPlayersLiveDataInteractor;
     }
 
     @Override
     public void loadNbaData() {
-        getNbaDataInteractor.execute(this);
+        loadNbaDataInteractor.execute(this);
+        view.displayToast("loading");
     }
 
     @Override
     public void onFabClick() {
-        view.displayToast();
+        view.displayToast("fab");
     }
 
     @Override
-    public void onGetData(NbaData data) {
-        view.displayToast();
+    public void onLoadNbaData(NbaData data) {
+        view.displayToast("load nba data");
+        getPlayersLiveDataInteractor.execute(this);
     }
 
     @Override
-    public void onError() {
-        view.displayToast();
+    public void onLoadNbaDataError() {
+        view.displayToast("error nba data");
+    }
+
+    @Override
+    public void onGetPlayersObservable(LiveData<Player> players) {
+        view.displayToast("get players");
+    }
+
+    @Override
+    public void onGetPlayersObservableError() {
+        view.displayToast("error get players");
     }
 }

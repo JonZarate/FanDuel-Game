@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jonzarate.fanduelgame.BuildConfig;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -13,6 +14,7 @@ public class RetrofitSetup {
 
     public static FanDuelApi api =  new Retrofit.Builder()
             .baseUrl(BuildConfig.FANDUEL_API)
+            .client(new OkHttpClient())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(FanDuelApi.class);

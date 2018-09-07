@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class NbaData {
 
-    ArrayList<Player> players;
+    public ArrayList<Player> players;
 
-    ArrayList<Team> teams;
+    public ArrayList<Team> teams;
 
 }

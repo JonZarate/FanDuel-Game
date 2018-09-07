@@ -1,7 +1,7 @@
 package com.jonzarate.fanduelgame.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.jonzarate.fanduelgame.R;
 import com.jonzarate.fanduelgame.view.fragment.MainFragment;

@@ -1,6 +1,6 @@
 package com.jonzarate.fanduelgame.data.source.net;
 
-import com.jonzarate.fanduelgame.data.model.*;
+import com.jonzarate.fanduelgame.data.model.NbaData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

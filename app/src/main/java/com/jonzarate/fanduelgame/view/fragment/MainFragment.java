@@ -84,12 +84,12 @@ public class MainFragment extends Fragment implements MainContract.View {
 
 
     @OnClick(R.id.main_fab)
-    public void onClick(View view){
+    public void onClick(){
         presenter.onFabClick();
     }
 
     @Override
-    public void displayToast() {
-        Toast.makeText(getContext(), "Click", Toast.LENGTH_SHORT).show();
+    public void displayToast(String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 }

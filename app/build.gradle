@@ -35,6 +35,8 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:${room}"
     annotationProcessor "android.arch.persistence.room:compiler:${room}"
 
+    implementation "android.arch.lifecycle:livedata:${livedata}"
+
     implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
 
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"

@@ -2,6 +2,8 @@ package com.jonzarate.fanduelgame.di.module;
 
 import com.jonzarate.fanduelgame.data.repository.NbaRepository;
 import com.jonzarate.fanduelgame.data.repository.NbaRepositoryImpl;
+import com.jonzarate.fanduelgame.data.source.local.NbaDb;
+import com.jonzarate.fanduelgame.data.source.local.RoomSetup;
 import com.jonzarate.fanduelgame.data.source.net.FanDuelApi;
 import com.jonzarate.fanduelgame.data.source.net.RetrofitSetup;
 import com.jonzarate.fanduelgame.interactor.threading.MainThread;
@@ -28,6 +30,11 @@ public class AppModule {
     @Provides @Singleton
     FanDuelApi provideFanDuelApi() {
         return RetrofitSetup.api;
+    }
+
+    @Provides @Singleton
+    NbaDb provideNbaDb() {
+        return RoomSetup.nbaDb;
     }
 
     @Provides @Singleton
