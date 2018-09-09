@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jonzarate.fanduelgame.R;
 import com.jonzarate.fanduelgame.data.model.Player;
 
@@ -46,18 +49,26 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
     class PlayerViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView name, team, fppg;
+        private final RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.ic_person);
+
+        private ImageView image;
+        private TextView name, fppg;
 
         public PlayerViewHolder(View itemView) {
             super(itemView);
+            image = itemView.findViewById(R.id.player_img);
             name = itemView.findViewById(R.id.player_name);
-            team = itemView.findViewById(R.id.player_team);
             fppg = itemView.findViewById(R.id.player_fppg);
         }
 
         void setPlayer(Player player) {
+            Glide.with(this.itemView)
+                    .setDefaultRequestOptions(options)
+                    .load(player.imageUrl)
+                    .into(image);
+
             name.setText(player.getFirstName());
-            team.setText(player.getFirstName());
             fppg.setText(String.valueOf(player.getFppg()));
         }
     }
