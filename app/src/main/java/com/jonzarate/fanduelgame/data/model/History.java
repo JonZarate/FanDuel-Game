@@ -1,15 +1,24 @@
 package com.jonzarate.fanduelgame.data.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+@Entity(tableName = "history")
 public class History {
 
     @PrimaryKey(autoGenerate = true)
-    int id;
+    private int id;
 
-    String name0, name1, name2, name3;
-    float fppg0, fppg1, fppg2, fppg3;
-    String img0, img1, img2, img3;
+    @ColumnInfo(name = "higher_fppg_player")
+    private int higherFppgPlayer;
+
+    @ColumnInfo(name = "user_choice")
+    private int userChoice;
+
+    private String name0, name1, name2, name3;
+    private float fppg0, fppg1, fppg2, fppg3;
+    private String img0, img1, img2, img3;
 
     public int getId() {
         return id;
@@ -113,5 +122,21 @@ public class History {
 
     public void setImg3(String img3) {
         this.img3 = img3;
+    }
+
+    public int getHigherFppgPlayer() {
+        return higherFppgPlayer;
+    }
+
+    public void setHigherFppgPlayer(int higherFppgPlayer) {
+        this.higherFppgPlayer = higherFppgPlayer;
+    }
+
+    public int getUserChoice() {
+        return userChoice;
+    }
+
+    public void setUserChoice(int userChoice) {
+        this.userChoice = userChoice;
     }
 }
