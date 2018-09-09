@@ -59,7 +59,6 @@ public class PlayerFragment extends Fragment implements PlayerContract.View {
 
         ButterKnife.bind(this, view);
 
-
         initializeRecycler();
 
         DaggerPlayerComponent.builder()

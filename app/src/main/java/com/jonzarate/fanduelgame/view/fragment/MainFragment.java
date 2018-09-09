@@ -38,6 +38,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Inject
     MainContract.Presenter presenter;
 
+    private boolean started;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -70,7 +71,11 @@ public class MainFragment extends Fragment implements MainContract.View {
                 .build()
                 .inject(this);
 
-        presenter.loadNbaData();
+        // Avoid reloading data when rotating the phone
+        if (!started) {
+            started = true;
+            presenter.loadNbaData();
+        }
 
         setupView();
 
