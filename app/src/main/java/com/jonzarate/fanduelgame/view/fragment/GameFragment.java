@@ -63,7 +63,7 @@ public class GameFragment extends Fragment implements GameContract.View {
         ButterKnife.bind(this, view);
 
         initializeRecycler();
-        hideButtons();
+        hideGameOptions();
 
         DaggerGameComponent.builder()
                 .appComponent(((FanDuelApplication)getContext().getApplicationContext()).appComponent)
@@ -82,11 +82,6 @@ public class GameFragment extends Fragment implements GameContract.View {
         recycler.setAdapter(adapter = new GameAdapter());
     }
 
-    private void hideButtons() {
-        exit.setVisibility(View.GONE);
-        next.setVisibility(View.GONE);
-    }
-
     @Override
     public void setGameData(History history) {
         adapter.updateGame(history);
@@ -102,6 +97,12 @@ public class GameFragment extends Fragment implements GameContract.View {
     public void showAfterGameOptions() {
         exit.setVisibility(View.VISIBLE);
         next.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideGameOptions() {
+        exit.setVisibility(View.GONE);
+        next.setVisibility(View.GONE);
     }
 
     @Override

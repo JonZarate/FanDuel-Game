@@ -25,11 +25,13 @@ public class GamePresenter implements GameContract.Presenter, NewGameCallbacks {
     @Override
     public void onPlayerSelected(int position) {
         view.setBorders(position, history.getHigherFppgPlayer());
+        view.showAfterGameOptions();
     }
 
     @Override
     public void onNextClick() {
         newGameInteractor.execute(this);
+        view.hideGameOptions();
     }
 
     @Override

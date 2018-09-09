@@ -15,6 +15,7 @@ public interface GameContract {
         void setGameData(History history);
         void setBorders(int positionSelected, int positionHighestFppgPlayer);
         void showAfterGameOptions();
+        void hideGameOptions();
         void goBack();
     }
 
