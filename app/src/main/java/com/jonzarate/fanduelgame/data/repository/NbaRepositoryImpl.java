@@ -59,6 +59,11 @@ public class NbaRepositoryImpl implements NbaRepository {
 
     @Override
     public LiveData<List<Player>> getPlayersLiveData() {
+        return db.playerDao().getAllLiveData();
+    }
+
+    @Override
+    public List<Player> getPlayers() {
         return db.playerDao().getAll();
     }
 
@@ -69,6 +74,11 @@ public class NbaRepositoryImpl implements NbaRepository {
 
     @Override
     public LiveData<List<History>> getHistoryLiveData() {
-        return db.historyDao().getAll();
+        return db.historyDao().getAllLiveData();
+    }
+
+    @Override
+    public void saveGame(History history) {
+        db.historyDao().insert(history);
     }
 }

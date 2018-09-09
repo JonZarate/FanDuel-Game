@@ -14,7 +14,7 @@ import java.util.List;
 public interface HistoryDao {
 
     @Query("SELECT * FROM history")
-    LiveData<List<History>> getAll();
+    LiveData<List<History>> getAllLiveData();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(History history);

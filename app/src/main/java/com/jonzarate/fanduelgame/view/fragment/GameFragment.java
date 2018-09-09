@@ -76,14 +76,9 @@ public class GameFragment extends Fragment implements GameContract.View {
 
 
     private void initializeRecycler() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                getContext(), LinearLayoutManager.HORIZONTAL, false);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                getContext(), layoutManager.getOrientation());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         recycler.setLayoutManager(layoutManager);
-        recycler.addItemDecoration(dividerItemDecoration);
         recycler.setAdapter(adapter = new GameAdapter());
     }
 
@@ -107,6 +102,11 @@ public class GameFragment extends Fragment implements GameContract.View {
     public void showAfterGameOptions() {
         exit.setVisibility(View.VISIBLE);
         next.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void goBack() {
+        getActivity().onBackPressed();
     }
 
     @OnClick({R.id.game_next, R.id.game_exit})

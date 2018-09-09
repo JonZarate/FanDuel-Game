@@ -15,7 +15,10 @@ import java.util.List;
 public interface PlayerDao {
 
     @Query("SELECT * FROM player")
-    LiveData<List<Player>> getAll();
+    LiveData<List<Player>> getAllLiveData();
+
+    @Query("SELECT * FROM player")
+    List<Player> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Player> players);

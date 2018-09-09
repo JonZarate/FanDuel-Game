@@ -12,13 +12,14 @@ import java.util.List;
 public interface NbaRepository {
 
     NbaData downloadNbaData();
-
     void saveNbaData(NbaData data);
 
     LiveData<List<Player>> getPlayersLiveData();
+    List<Player> getPlayers();
 
     LiveData<List<Team>> getTeamsLiveData();
 
     LiveData<List<History>> getHistoryLiveData();
+    void saveGame(History history);
 
 }
