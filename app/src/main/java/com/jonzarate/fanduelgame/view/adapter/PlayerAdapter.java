@@ -57,9 +57,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
         public PlayerViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.player_history_img0);
-            name = itemView.findViewById(R.id.player_history_name0);
-            fppg = itemView.findViewById(R.id.player_history_fppg0);
+            image = itemView.findViewById(R.id.player_img);
+            name = itemView.findViewById(R.id.player_name);
+            fppg = itemView.findViewById(R.id.player_fppg);
         }
 
         void setPlayer(Player player) {
