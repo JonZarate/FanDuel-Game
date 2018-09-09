@@ -2,6 +2,7 @@ package com.jonzarate.fanduelgame.data.repository;
 
 import android.arch.lifecycle.LiveData;
 
+import com.jonzarate.fanduelgame.data.model.History;
 import com.jonzarate.fanduelgame.data.model.NbaData;
 import com.jonzarate.fanduelgame.data.model.Player;
 import com.jonzarate.fanduelgame.data.model.Team;
@@ -17,5 +18,7 @@ public interface NbaRepository {
     LiveData<List<Player>> getPlayersLiveData();
 
     LiveData<List<Team>> getTeamsLiveData();
+
+    LiveData<List<History>> getHistoryLiveData();
 
 }

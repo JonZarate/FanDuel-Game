@@ -2,6 +2,7 @@ package com.jonzarate.fanduelgame.data.repository;
 
 import android.arch.lifecycle.LiveData;
 
+import com.jonzarate.fanduelgame.data.model.History;
 import com.jonzarate.fanduelgame.data.model.NbaData;
 import com.jonzarate.fanduelgame.data.model.Player;
 import com.jonzarate.fanduelgame.data.model.Team;
@@ -64,5 +65,10 @@ public class NbaRepositoryImpl implements NbaRepository {
     @Override
     public LiveData<List<Team>> getTeamsLiveData() {
         return db.teamDao().getAllLiveData();
+    }
+
+    @Override
+    public LiveData<List<History>> getHistoryLiveData() {
+        return db.historyDao().getAll();
     }
 }
