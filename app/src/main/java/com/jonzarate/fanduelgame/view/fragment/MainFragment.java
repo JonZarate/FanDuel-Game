@@ -1,6 +1,7 @@
 package com.jonzarate.fanduelgame.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,7 @@ import com.jonzarate.fanduelgame.R;
 import com.jonzarate.fanduelgame.contract.MainContract;
 import com.jonzarate.fanduelgame.di.component.DaggerMainComponent;
 import com.jonzarate.fanduelgame.di.module.MainModule;
+import com.jonzarate.fanduelgame.view.activity.GameActivity;
 import com.jonzarate.fanduelgame.view.adapter.MainFragmentAdapter;
 
 import javax.inject.Inject;
@@ -95,7 +97,8 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void displayToast(String text) {
-        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+    public void launchGame() {
+        Intent intent = new Intent(getContext(), GameActivity.class);
+        startActivity(intent);
     }
 }

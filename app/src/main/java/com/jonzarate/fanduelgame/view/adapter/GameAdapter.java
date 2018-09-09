@@ -76,7 +76,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
 
     @Override
     public int getItemCount() {
-        return 4;
+        return (history == null) ? 0 : 4;
     }
 
     class GamePlayerViewHolder extends RecyclerView.ViewHolder {
