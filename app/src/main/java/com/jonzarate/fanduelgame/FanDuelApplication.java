@@ -17,8 +17,7 @@ public class FanDuelApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        RoomSetup.nbaDb =
-                Room.databaseBuilder(this, NbaDb.class, "bna_database").build();
+        RoomSetup.init(this);
 
         appComponent = DaggerAppComponent
                 .builder()
