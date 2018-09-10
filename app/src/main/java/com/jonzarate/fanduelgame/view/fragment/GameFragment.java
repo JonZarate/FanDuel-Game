@@ -97,8 +97,8 @@ public class GameFragment extends Fragment implements GameContract.View, GameAda
     @Override
     public void setBorders(int positionSelected, int positionHighestFppgPlayer) {
         adapter.setFppgVisible(true);
+        adapter.setBorders(positionSelected, positionHighestFppgPlayer);
         adapter.notifyDataSetChanged();
-
     }
 
     @Override

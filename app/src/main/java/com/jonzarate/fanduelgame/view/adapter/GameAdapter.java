@@ -1,6 +1,7 @@
 package com.jonzarate.fanduelgame.view.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +22,28 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
 
     private OnPlayerClickListener listener;
     private History history;
+
     private boolean fppgVisible;
+    private int positionSelected, positionHighestFppgPlayer;
 
     public GameAdapter(OnPlayerClickListener listener) {
         this.listener = listener;
-        fppgVisible = false;
     }
 
     public void updateGame(History history) {
         this.history = history;
+        fppgVisible = false;
+        positionSelected = -1;
+        positionHighestFppgPlayer = -1;
     }
 
     public void setFppgVisible(boolean fppgVisible) {
         this.fppgVisible = fppgVisible;
+    }
+
+    public void setBorders(int positionSelected, int positionHighestFppgPlayer) {
+        this.positionSelected = positionSelected;
+        this.positionHighestFppgPlayer = positionHighestFppgPlayer;
     }
 
     @NonNull
@@ -144,12 +154,31 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
             else
                 this.fppg.setVisibility(View.GONE);
 
+            setData(name, image, fppg);
+            setBorder();
+        }
+
+        private void setData(String name, String image, float fppg){
             this.name.setText(name);
             this.fppg.setText(String.valueOf(fppg));
             Glide.with(itemView)
                     .setDefaultRequestOptions(options)
                     .load(image)
                     .into(this.image);
+        }
+
+        private void setBorder() {
+            CardView card = (CardView) itemView;
+            if (positionHighestFppgPlayer == getAdapterPosition()
+                    && positionSelected == getAdapterPosition()) {
+                card.setBackgroundResource(R.drawable.border_selected_winner);
+            } else if (positionHighestFppgPlayer == getAdapterPosition()) {
+                card.setBackgroundResource(R.drawable.border_winner);
+            } else if (positionSelected == getAdapterPosition()) {
+                card.setBackgroundResource(R.drawable.border_selected);
+            } else {
+                card.setBackgroundResource(R.drawable.border_unselected);
+            }
         }
     }
 }
