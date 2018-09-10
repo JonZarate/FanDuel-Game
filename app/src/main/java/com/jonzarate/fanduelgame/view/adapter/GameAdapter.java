@@ -21,13 +21,19 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
 
     private OnPlayerClickListener listener;
     private History history;
+    private boolean fppgVisible;
 
     public GameAdapter(OnPlayerClickListener listener) {
         this.listener = listener;
+        fppgVisible = false;
     }
 
     public void updateGame(History history) {
         this.history = history;
+    }
+
+    public void setFppgVisible(boolean fppgVisible) {
+        this.fppgVisible = fppgVisible;
     }
 
     @NonNull
@@ -42,7 +48,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
 
     @Override
     public void onBindViewHolder(@NonNull GamePlayerViewHolder holder, int position) {
-        holder.setGame(getPlayerName(position), getPlayerImage(position));
+        holder.setGame(
+                getPlayerName(position), getPlayerImage(position), getPlayerFppg(position));
     }
 
     private String getPlayerImage(int position) {
@@ -79,6 +86,23 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
         return null;
     }
 
+    private float getPlayerFppg(int position) {
+        switch (position) {
+            case 0:
+                return history.getFppg0();
+
+            case 1:
+                return history.getFppg1();
+
+            case 2:
+                return history.getFppg2();
+
+            case 3:
+                return history.getFppg3();
+        }
+        return 0;
+    }
+
     @Override
     public int getItemCount() {
         return (history == null) ? 0 : 4;
@@ -100,21 +124,28 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
         private OnPlayerClickListener playerListener;
 
         private ImageView image;
-        private TextView name;
+        private TextView name, fppg;
 
         GamePlayerViewHolder(View itemView, OnPlayerClickListener playerListener) {
             super(itemView);
 
             image = itemView.findViewById(R.id.game_player_img);
             name = itemView.findViewById(R.id.game_player_name);
+            fppg = itemView.findViewById(R.id.game_player_fppg);
 
             this.playerListener = playerListener;
 
             itemView.setOnClickListener(this.clickListener);
         }
 
-        void setGame(String name, String image) {
+        void setGame(String name, String image, float fppg) {
+            if (fppgVisible)
+                this.fppg.setVisibility(View.VISIBLE);
+            else
+                this.fppg.setVisibility(View.GONE);
+
             this.name.setText(name);
+            this.fppg.setText(String.valueOf(fppg));
             Glide.with(itemView)
                     .setDefaultRequestOptions(options)
                     .load(image)

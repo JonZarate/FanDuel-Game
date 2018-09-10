@@ -90,12 +90,15 @@ public class GameFragment extends Fragment implements GameContract.View, GameAda
     public void setGameData(History history) {
         gameReady = true;
         adapter.updateGame(history);
+        adapter.setFppgVisible(false);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void setBorders(int positionSelected, int positionHighestFppgPlayer) {
-        Toast.makeText(getContext(), "" + positionSelected, Toast.LENGTH_SHORT).show();
+        adapter.setFppgVisible(true);
+        adapter.notifyDataSetChanged();
+
     }
 
     @Override
