@@ -8,13 +8,12 @@
 
     <ImageView
         android:id="@+id/player_history_img3"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/player_history_img2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_person" />
@@ -43,12 +42,11 @@
 
     <ImageView
         android:id="@+id/player_history_img2"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/player_history_img3"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/player_history_img1"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_person" />
@@ -77,12 +75,11 @@
 
     <ImageView
         android:id="@+id/player_history_img1"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/player_history_img2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/player_history_img0"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_person" />
@@ -111,12 +108,12 @@
 
     <ImageView
         android:id="@+id/player_history_img0"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/player_history_img1"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_person" />
