@@ -73,6 +73,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         }
 
         void setHistory(History history) {
+            setBackground(history);
             setPlayerData(history.getName0(), history.getFppg0(), history.getImg0(), name0, fppg0, image0);
             setPlayerData(history.getName1(), history.getFppg1(), history.getImg1(), name1, fppg1, image1);
             setPlayerData(history.getName2(), history.getFppg2(), history.getImg2(), name2, fppg2, image2);
@@ -87,6 +88,33 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
             nameView.setText(name);
             fppgView.setText(String.valueOf(fppg));
+        }
+
+        private void setBackground(History history) {
+            image0.setBackground(null);
+            image1.setBackground(null);
+            image2.setBackground(null);
+            image3.setBackground(null);
+
+            int positionHighestFppgPlayer = history.getHigherFppgPlayer();
+            int positionSelected = history.getUserChoice();
+
+            if (positionHighestFppgPlayer ==  positionSelected) {
+                getImageViewByIndex(positionSelected).setBackgroundResource(R.drawable.border_selected_winner);
+            } else {
+                getImageViewByIndex(positionHighestFppgPlayer).setBackgroundResource(R.drawable.border_winner);
+                getImageViewByIndex(positionSelected).setBackgroundResource(R.drawable.border_selected);
+            }
+        }
+
+        private ImageView getImageViewByIndex(int index) {
+            switch (index) {
+                case 0: return image0;
+                case 1: return image1;
+                case 2: return image2;
+                case 3: return image3;
+            }
+            return null;
         }
     }
 
