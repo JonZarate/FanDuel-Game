@@ -15,10 +15,15 @@ import com.jonzarate.fanduelgame.data.model.History;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerViewHolder> {
 
+    public interface OnPlayerClickListener {
+        void onPlayerClick(int position);
+    }
+
+    private OnPlayerClickListener listener;
     private History history;
 
-    public GameAdapter() {
-
+    public GameAdapter(OnPlayerClickListener listener) {
+        this.listener = listener;
     }
 
     public void updateGame(History history) {
@@ -32,7 +37,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
                 .from(parent.getContext())
                 .inflate(R.layout.viewholder_game_player, parent, false);
 
-        return new GamePlayerViewHolder(view);
+        return new GamePlayerViewHolder(view, listener);
     }
 
     @Override
@@ -79,19 +84,33 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GamePlayerView
         return (history == null) ? 0 : 4;
     }
 
+
     class GamePlayerViewHolder extends RecyclerView.ViewHolder {
+
+        private View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playerListener.onPlayerClick(getAdapterPosition());
+            }
+        };
 
         private final RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.ic_person);
 
+        private OnPlayerClickListener playerListener;
+
         private ImageView image;
         private TextView name;
 
-        GamePlayerViewHolder(View itemView) {
+        GamePlayerViewHolder(View itemView, OnPlayerClickListener playerListener) {
             super(itemView);
 
             image = itemView.findViewById(R.id.game_player_img);
             name = itemView.findViewById(R.id.game_player_name);
+
+            this.playerListener = playerListener;
+
+            itemView.setOnClickListener(this.clickListener);
         }
 
         void setGame(String name, String image) {

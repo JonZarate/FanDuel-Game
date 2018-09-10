@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.jonzarate.fanduelgame.FanDuelApplication;
 import com.jonzarate.fanduelgame.R;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GameFragment extends Fragment implements GameContract.View {
+public class GameFragment extends Fragment implements GameContract.View, GameAdapter.OnPlayerClickListener {
 
     @BindView(R.id.game_recycler)
     RecyclerView recycler;
@@ -79,7 +80,7 @@ public class GameFragment extends Fragment implements GameContract.View {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         recycler.setLayoutManager(layoutManager);
-        recycler.setAdapter(adapter = new GameAdapter());
+        recycler.setAdapter(adapter = new GameAdapter(this));
     }
 
     @Override
@@ -90,7 +91,7 @@ public class GameFragment extends Fragment implements GameContract.View {
 
     @Override
     public void setBorders(int positionSelected, int positionHighestFppgPlayer) {
-
+        Toast.makeText(getContext(), "" + positionSelected, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -121,5 +122,10 @@ public class GameFragment extends Fragment implements GameContract.View {
                 presenter.onExitClick();
                 break;
         }
+    }
+
+    @Override
+    public void onPlayerClick(int position) {
+        presenter.onPlayerSelected(position);
     }
 }
