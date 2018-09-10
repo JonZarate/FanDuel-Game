@@ -45,6 +45,7 @@ public class GameFragment extends Fragment implements GameContract.View, GameAda
     GameContract.Presenter presenter;
 
     private GameAdapter adapter;
+    private boolean gameReady;
 
     public static GameFragment newInstance() {
         GameFragment fragment = new GameFragment();
@@ -62,6 +63,8 @@ public class GameFragment extends Fragment implements GameContract.View, GameAda
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         ButterKnife.bind(this, view);
+
+        gameReady = false;
 
         initializeRecycler();
         hideGameOptions();
@@ -85,6 +88,7 @@ public class GameFragment extends Fragment implements GameContract.View, GameAda
 
     @Override
     public void setGameData(History history) {
+        gameReady = true;
         adapter.updateGame(history);
         adapter.notifyDataSetChanged();
     }
@@ -126,6 +130,9 @@ public class GameFragment extends Fragment implements GameContract.View, GameAda
 
     @Override
     public void onPlayerClick(int position) {
-        presenter.onPlayerSelected(position);
+        if (gameReady) {
+            gameReady = false;
+            presenter.onPlayerSelected(position);
+        }
     }
 }
