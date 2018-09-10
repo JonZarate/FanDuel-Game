@@ -17,6 +17,6 @@ public interface HistoryDao {
     LiveData<List<History>> getAllLiveData();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(History history);
+    long insert(History history);
 
 }

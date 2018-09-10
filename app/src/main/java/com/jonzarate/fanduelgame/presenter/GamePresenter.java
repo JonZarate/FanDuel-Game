@@ -3,27 +3,35 @@ package com.jonzarate.fanduelgame.presenter;
 import com.jonzarate.fanduelgame.contract.GameContract;
 import com.jonzarate.fanduelgame.data.model.History;
 import com.jonzarate.fanduelgame.interactor.NewGameInteractor;
+import com.jonzarate.fanduelgame.interactor.SaveGameInteractor;
 import com.jonzarate.fanduelgame.interactor.callback.NewGameCallbacks;
+import com.jonzarate.fanduelgame.interactor.callback.SaveGameCallbacks;
 
 import javax.inject.Inject;
 
-public class GamePresenter implements GameContract.Presenter, NewGameCallbacks {
+public class GamePresenter implements GameContract.Presenter, NewGameCallbacks, SaveGameCallbacks {
 
     private GameContract.View view;
     private NewGameInteractor newGameInteractor;
+    private SaveGameInteractor saveGameInteractor;
 
     private History history;
 
     @Inject
-    public GamePresenter(GameContract.View view, NewGameInteractor newGameInteractor) {
+    public GamePresenter(GameContract.View view, NewGameInteractor newGameInteractor, SaveGameInteractor saveGameInteractor) {
         this.view = view;
         this.newGameInteractor = newGameInteractor;
+        this.saveGameInteractor = saveGameInteractor;
 
         onNextClick();
     }
 
     @Override
     public void onPlayerSelected(int position) {
+        history.setUserChoice(position);
+        saveGameInteractor.setHistory(history);
+        saveGameInteractor.execute(this);
+
         view.setBorders(position, history.getHigherFppgPlayer());
         view.showAfterGameOptions();
     }
@@ -48,5 +56,15 @@ public class GamePresenter implements GameContract.Presenter, NewGameCallbacks {
     @Override
     public void onNewGameError() {
         view.goBack();
+    }
+
+    @Override
+    public void onSaveGame() {
+
+    }
+
+    @Override
+    public void onSaveGameError() {
+
     }
 }

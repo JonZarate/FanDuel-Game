@@ -23,6 +23,8 @@ import com.jonzarate.fanduelgame.view.adapter.HistoryAdapter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,6 +35,9 @@ public class HistoryFragment extends Fragment implements HistoryContract.View{
 
     @BindView(R.id.history_recycler)
     RecyclerView recycler;
+
+    @Inject
+    HistoryContract.Presenter presenter;
 
     private HistoryAdapter adapter;
 
@@ -60,6 +65,8 @@ public class HistoryFragment extends Fragment implements HistoryContract.View{
                 .historyModule(new HistoryModule(this))
                 .build()
                 .inject(this);
+
+        presenter.loadHistoryLiveData();
 
         return view;
     }
